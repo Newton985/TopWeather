@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <data>
+        <variable
+            name="topCity"
+            type="com.example.topweather.models.TopCity" />
+    </data>
+    
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="215dp"
+    app:cardBackgroundColor="@color/darkBlue"
+    app:cardCornerRadius="10dp"
+    android:elevation="5dp"
+    android:id="@+id/topCityWeatherCard"
+    app:contentPadding="10dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="12dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+ >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:text="@{topCity.englishName + `, `+ topCity.country.get(`EnglishName`)}"
+            android:id="@+id/cityNameTextView"
+            app:layout_constraintEnd_toStartOf="@id/weatherIcon"
+            android:paddingEnd="5dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cityNameTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/orange50"
+            android:layout_marginVertical="5dp"
+            android:text="@{topCity.formatedDate}"
+            android:maxLength="20"
+            android:id="@+id/dateTextView"/>
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@id/day5ForeCastText"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@mipmap/sunny"
+            android:id="@+id/weatherIcon"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/favButton"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_favorite_24"
+            app:tint="@color/white" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/dateTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginVertical="5dp"
+            android:textSize="33sp"
+            android:textColor="@color/orange"
+            android:text="@{topCity.formatedTemperature}"
+            android:id="@+id/temperatureTextView"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/temperatureTextView"
+            app:layout_constraintBottom_toBottomOf="@id/temperatureTextView"
+            android:id="@+id/weatherDescriptionText"
+            app:layout_constraintStart_toEndOf="@id/temperatureTextView"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="@{topCity.weatherText}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/day2ForeCastText"
+            android:text="FRI\n24 C"
+            android:id="@+id/day1ForeCastText"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="14sp"
+            android:drawablePadding="5dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:drawableBottomCompat="@drawable/ic_baseline_cloud_24"
+            app:drawableTint="@color/white" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/day1ForeCastText"
+            app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="SAT\n25 C"
+            android:textSize="14sp"
+            android:id="@+id/day2ForeCastText"
+            android:gravity="center"
+            android:padding="5dp"
+            android:drawablePadding="5dp"
+            app:drawableBottomCompat="@drawable/ic_baseline_cloud_24"
+            app:drawableTint="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/day3ForeCastText"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/day2ForeCastText"
+            app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="SAT\n25 C"
+            android:textSize="14sp"
+            android:id="@+id/day3ForeCastText"
+            android:gravity="center"
+            android:padding="5dp"
+            android:drawablePadding="5dp"
+            app:drawableBottomCompat="@drawable/ic_baseline_cloud_24"
+            app:drawableTint="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/day4ForeCastText"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/day3ForeCastText"
+            app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="SAT\n25 C"
+            android:textSize="14sp"
+            android:id="@+id/day4ForeCastText"
+            android:gravity="center"
+            android:padding="5dp"
+            android:drawablePadding="5dp"
+            app:drawableBottomCompat="@drawable/ic_baseline_cloud_24"
+            app:drawableTint="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/day5ForeCastText"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/day4ForeCastText"
+            app:layout_constraintTop_toBottomOf="@id/temperatureTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="SAT\n25 C"
+            android:textSize="14sp"
+            android:id="@+id/day5ForeCastText"
+            android:gravity="center"
+            android:padding="5dp"
+            android:drawablePadding="5dp"
+            app:drawableBottomCompat="@drawable/ic_baseline_cloud_24"
+            app:drawableTint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+</layout>
