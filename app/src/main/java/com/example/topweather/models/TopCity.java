@@ -43,7 +43,7 @@ public class TopCity {
 
 //  @ColumnInfo()
   @SerializedName("Temperature")
-  private Temperature temperature;
+  private Temperature forecastTemperature;
 
 
   public String getKey() {
@@ -119,10 +119,10 @@ public class TopCity {
   }
 
   public Temperature getTemperature() {
-    return temperature;
+    return forecastTemperature;
   }
 
-  public void setTemperature(Temperature temperature) {
-    this.temperature = temperature;
+  public void setTemperature(Temperature forecastTemperature) {
+    this.forecastTemperature = forecastTemperature;
   }
 }

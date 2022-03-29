@@ -22,7 +22,7 @@ public class TopCitiesWeatherListViewHolder extends RecyclerView.ViewHolder {
     public void bind(TopCity topCity){
         Date date = new Date(topCity.getEpochTime() * 1000);
         topCity.setFormatedDate(date.toString());
-        topCity.setFormatedTemperature(topCity.getTemperature().getImperial().get("Value") + " \u2103");
+        topCity.setFormatedTemperature(topCity.getTemperature().getMetric().get("Value") + " \u2103");
         topCityWeatherItemBinding.setTopCity(topCity);
     }
 }

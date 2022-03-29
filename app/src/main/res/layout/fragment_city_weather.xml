@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    
+    <data>
+        <variable
+            name="foreCast"
+            type="com.example.topweather.models.ForeCast" />
+    </data>
+    
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CityWeatherFragment">
+
+
+    <com.google.android.material.card.MaterialCardView
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/darkBlue"
+        app:cardCornerRadius="10dp"
+        android:elevation="5dp"
+        android:id="@+id/weatherHeadlineCard"
+        app:contentPadding="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day"
+                android:id="@+id/dayText"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:drawablePadding="5dp"
+                android:textColor="@color/white"
+                app:drawableEndCompat="@drawable/ic_baseline_wb_sunny_24" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dayText"
+                android:id="@+id/weatherText"
+                android:text="@{foreCast.day.longPhrase}"
+                android:textColor="@color/orange"
+                android:maxLines="2"
+                android:textStyle="bold"
+                android:drawablePadding="5dp"
+                app:drawableTint="@color/orange"
+                app:drawableStartCompat="@drawable/ic_baseline_cloud_24"
+                android:paddingBottom="10dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#1Ef2f2f2"
+                app:layout_constraintTop_toBottomOf="@+id/weatherText"
+                android:id="@+id/line1"
+                android:layout_marginVertical="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/thermIcon"
+                android:text="Heat"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/minTempLayout"
+                app:drawableTopCompat="@drawable/ic_baseline_device_thermostat_24"
+                app:layout_constraintBottom_toBottomOf="@id/maxTempLayout"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                app:layout_constraintStart_toEndOf="@id/thermIcon"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/minTempLayout"
+                app:layout_constraintEnd_toStartOf="@id/maxTempLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{Double.toString(foreCast.temperature.maximum.value) + ` ℃`}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/maxTempText"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Maximum"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                app:layout_constraintStart_toEndOf="@id/minTempLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/maxTempLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{Double.toString(foreCast.temperature.minimum.value) + ` ℃`}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/minTempText"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Minimum"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#1Ef2f2f2"
+                app:layout_constraintTop_toBottomOf="@+id/maxTempLayout"
+                android:id="@+id/line2"
+                android:layout_marginVertical="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/windIcon"
+                android:text="Wind"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/minTempLayout"
+                app:drawableTopCompat="@drawable/ic_baseline_waves_24"
+                app:layout_constraintBottom_toBottomOf="@id/windSpeedLayout"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                app:layout_constraintStart_toEndOf="@id/windIcon"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/windSpeedLayout"
+                app:layout_constraintEnd_toStartOf="@id/maxTempLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{Double.toString(foreCast.day.wind.speed.value) + `Km/H`}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/windSpeed"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Wind Speed"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line2"
+                app:layout_constraintStart_toEndOf="@id/minTempLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/windDirLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{foreCast.day.wind.direction.english}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/windDirText"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Direction"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        app:layout_constraintTop_toBottomOf="@id/weatherHeadlineCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/darkBlue"
+        app:cardCornerRadius="10dp"
+        android:elevation="5dp"
+        android:id="@+id/nightWeatherHeadlineCard"
+        app:contentPadding="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Night"
+                android:id="@+id/nightText"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:drawablePadding="5dp"
+                android:textColor="@color/white"
+                app:drawableEndCompat="@drawable/ic_baseline_nights_stay_24" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nightText"
+                android:id="@+id/nightWeatherText"
+                android:text="@{foreCast.night.longPhrase}"
+                android:textColor="@color/orange"
+                android:maxLines="2"
+                android:textStyle="bold"
+                android:drawablePadding="5dp"
+                app:drawableTint="@color/orange"
+                app:drawableStartCompat="@drawable/ic_baseline_cloud_24"
+                android:paddingBottom="10dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#1Ef2f2f2"
+                app:layout_constraintTop_toBottomOf="@+id/nightWeatherText"
+                android:id="@+id/line3"
+                android:layout_marginVertical="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/nightThermIcon"
+                android:text="Heat"
+                app:layout_constraintTop_toBottomOf="@id/line3"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/nightMinTempLayout"
+                app:drawableTopCompat="@drawable/ic_baseline_device_thermostat_24"
+                app:layout_constraintBottom_toBottomOf="@id/nightMaxTempLayout"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line3"
+                app:layout_constraintStart_toEndOf="@id/nightThermIcon"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/nightMinTempLayout"
+                app:layout_constraintEnd_toStartOf="@id/nightMaxTempLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{Double.toString(foreCast.temperature.maximum.value) + ` ℃`}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/nightMaxTempText"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Maximum"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line3"
+                app:layout_constraintStart_toEndOf="@id/nightMinTempLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/nightMaxTempLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{Double.toString(foreCast.temperature.minimum.value) + ` ℃`}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/nightMinTempText"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Minimum"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#1Ef2f2f2"
+                app:layout_constraintTop_toBottomOf="@+id/nightMaxTempLayout"
+                android:id="@+id/line4"
+                android:layout_marginVertical="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:id="@+id/nightWindIcon"
+                android:text="Wind"
+                app:layout_constraintTop_toBottomOf="@id/line4"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/nightMinTempLayout"
+                app:drawableTopCompat="@drawable/ic_baseline_waves_24"
+                app:layout_constraintBottom_toBottomOf="@id/nightWindSpeedLayout"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line4"
+                app:layout_constraintStart_toEndOf="@id/nightWindIcon"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/nightWindSpeedLayout"
+                app:layout_constraintEnd_toStartOf="@id/nightMaxTempLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{Double.toString(foreCast.day.wind.speed.value) + `Km/H`}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/nightWindSpeed"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Wind Speed"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/line4"
+                app:layout_constraintStart_toEndOf="@id/nightMinTempLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:id="@+id/nightWindDirLayout"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:textColor="@color/white"
+                    android:text="@{foreCast.night.wind.direction.english}"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/nightWindDirText"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Direction"
+                    android:textColor="#c3c3c3"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

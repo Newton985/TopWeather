@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.topweather.models.ForecastsResponse;
 import com.example.topweather.service.TopCityWeatherService;
 import com.example.topweather.api.RetrofitServiceBuilder;
 import com.example.topweather.models.TopCity;
@@ -16,8 +17,9 @@ import retrofit2.Response;
 
 public class TopCityWeatherRepository {
 
-    private MutableLiveData<List<TopCity>> topCityWeatherMutableLiveData = new MutableLiveData<>();
-    private TopCityWeatherService topCityWeatherService;
+    private final MutableLiveData<List<TopCity>> topCityWeatherMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<ForecastsResponse> forecastsResponseMutableLiveData = new MutableLiveData<>();
+    private final TopCityWeatherService topCityWeatherService;
 
     public TopCityWeatherRepository(){
         topCityWeatherService = RetrofitServiceBuilder.build(TopCityWeatherService.class);
@@ -47,11 +49,28 @@ public class TopCityWeatherRepository {
 
    public void getTopCityWeather(){ getTopCityWeather(null);}
 
+
+    public void  getLocationForeCast(String locationKey){
+        topCityWeatherService.getLocationForeCast(locationKey).enqueue(new Callback<ForecastsResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<ForecastsResponse> call, @NonNull Response<ForecastsResponse> response) {
+                if (response.isSuccessful()){
+                    forecastsResponseMutableLiveData.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ForecastsResponse> call, @NonNull Throwable t) {
+
+            }
+        });
+    }
+
     public MutableLiveData<List<TopCity>> getTopCityWeatherMutableLiveData() {
         return topCityWeatherMutableLiveData;
     }
 
-    public void setTopCityWeatherMutableLiveData(MutableLiveData<List<TopCity>> topCityWeatherMutableLiveData) {
-        this.topCityWeatherMutableLiveData = topCityWeatherMutableLiveData;
+    public MutableLiveData<ForecastsResponse> getForecastsResponseMutableLiveData() {
+        return forecastsResponseMutableLiveData;
     }
 }

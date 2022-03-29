@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/round_primary_bg.xml" value="0.101" />
+        <entry key="app/src/main/res/layout/activity_city_weather.xml" value="0.1515625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15104166666666666" />
         <entry key="app/src/main/res/layout/activity_top_cities_weather.xml" value="0.1671875" />
+        <entry key="app/src/main/res/layout/fragment_city_weather.xml" value="0.1515625" />
         <entry key="app/src/main/res/layout/top_city_weather_item.xml" value="0.1671875" />
       </map>
     </option>
